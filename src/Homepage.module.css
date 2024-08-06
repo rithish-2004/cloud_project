@@ -1,99 +1,97 @@
-
 .qlEditor {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .qlEditor h1,
-  .qlEditor h2,
-  .qlEditor h3,
-  .qlEditor h4,
-  .qlEditor h5,
-  .qlEditor h6 {
-    margin: 1em 0;
-    font-weight: bold;
-  }
-  
-  .qlEditor p {
-    margin: 0 0 1em 0;
-  }
-  
-  .qlEditor ul,
-  .qlEditor ol {
-    margin: 0;
-    padding: 0 0 0 2em;
-  }
-  
-  .qlEditor ul li,
-  .qlEditor ol li {
-    margin: 0.5em 0;
-  }
-  
-  .qlEditor .ql-align-center {
-    text-align: center;
-  }
-  
-  .qlEditor .ql-align-right {
-    text-align: right;
-  }
-  
-  .qlEditor .ql-align-left {
-    text-align: left;
-  }
-  
-  .qlEditor .ql-font-serif {
-    font-family: 'Times New Roman', serif;
-  }
-  
-  .qlEditor .ql-font-sans {
-    font-family: Arial, sans-serif;
-  }
-  
-  .qlEditor .ql-font-monospace {
-    font-family: 'Courier New', monospace;
-  }
-  
-  .qlEditor strong {
-    font-weight: bold;
-  }
-  
-  .qlEditor em,
-  .qlEditor i {
-    font-style: italic;
-  }
-  
-  .qlEditor u {
-    text-decoration: underline;
-  }
-  
-  .qlEditor a {
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  .qlEditor blockquote {
-    border-left: 4px solid #dcdcdc;
-    padding: 0.5em 1em;
-    margin: 0;
-  }
-  
-  .buttonContainer {
-    margin-bottom: 16px;
-  }
-  
-  .postContainer {
-    width: 100%;
-    max-width: 800px;
-    margin-top: 20px;
-  }
-  
-  .post {
-    margin-bottom: 20px;
-  }
-  
-  .postDate {
-    font-size: 12px;
-    color: #888;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.qlEditor h1,
+.qlEditor h2,
+.qlEditor h3,
+.qlEditor h4,
+.qlEditor h5,
+.qlEditor h6 {
+  margin: 1em 0;
+  font-weight: bold;
+}
+
+.qlEditor p {
+  margin: 0 0 1em 0;
+}
+
+.qlEditor ul,
+.qlEditor ol {
+  margin: 0;
+  padding: 0 0 0 2em;
+}
+
+.qlEditor ul li,
+.qlEditor ol li {
+  margin: 0.5em 0;
+}
+
+.qlEditor .ql-align-center {
+  text-align: center;
+}
+
+.qlEditor .ql-align-right {
+  text-align: right;
+}
+
+.qlEditor .ql-align-left {
+  text-align: left;
+}
+
+.qlEditor .ql-font-serif {
+  font-family: 'Times New Roman', serif;
+}
+
+.qlEditor .ql-font-sans {
+  font-family: Arial, sans-serif;
+}
+
+.qlEditor .ql-font-monospace {
+  font-family: 'Courier New', monospace;
+}
+
+.qlEditor strong {
+  font-weight: bold;
+}
+
+.qlEditor em,
+.qlEditor i {
+  font-style: italic;
+}
+
+.qlEditor u {
+  text-decoration: underline;
+}
+
+.qlEditor a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.qlEditor blockquote {
+  border-left: 4px solid #dcdcdc;
+  padding: 0.5em 1em;
+  margin: 0;
+}
+
+.buttonContainer {
+  margin-bottom: 16px;
+}
+
+.postContainer {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.post {
+  margin-bottom: 20px;
+}
+
+.postDate {
+  font-size: 12px;
+  color: #888;
+}

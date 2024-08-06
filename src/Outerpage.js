@@ -25,7 +25,7 @@ const Outerpage = () => {
   };
 
   const handleCreateBlogClick = () => {
-    navigate('/login');
+    navigate('/register');
   };
 
   return (
@@ -34,7 +34,7 @@ const Outerpage = () => {
         <div className="logo"><img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" /></div>
         <Menu mode="horizontal" style={{ marginLeft: 'auto' }}>
           <Menu.Item key="signin" onClick={handleSignInClick} style={{ marginRight: '2px' }}>SIGN IN</Menu.Item>
-          <Menu.Item key="signup" style={{ marginRight: '2px' }}>SIGN UP</Menu.Item>
+          <Menu.Item key="signup" onClick={handleCreateBlogClick} style={{ marginRight: '2px' }}>SIGN UP</Menu.Item>
         </Menu>
       </div>
       <div className="initial-navbar">
@@ -45,11 +45,11 @@ const Outerpage = () => {
         </Menu>
       </div>
       <div className="container">
-      
+
         <div className="column">
           <img src={`${process.env.PUBLIC_URL}/images/himg2.png`} alt="" />
           <div className="column">
-        </div>
+          </div>
         </div>
         <div className="column">
           <img src={`${process.env.PUBLIC_URL}/images/himg1.jpg`} alt="" />
