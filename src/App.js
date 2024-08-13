@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Homepage from './HomePage';
-import Login from './Login';
-import Register from './Resgister';
-import Outerpage from './Outerpage';
+import Homepage from './Homepage/HomePage';
+import Login from './Authentication/Login';
+import Register from './Authentication/Resgister';
+import Outerpage from './Homepage/Outerpage';
 
 function App() {
   return (

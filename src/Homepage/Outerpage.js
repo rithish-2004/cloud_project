@@ -25,30 +25,42 @@ const Outerpage = () => {
   };
 
   const handleCreateBlogClick = () => {
-    navigate('/register');
+    navigate('/register'); // Ensure this matches your route configuration
   };
 
   return (
     <>
       <div className={`navbar ${isVisible ? 'visible' : 'hidden'}`}>
-        <div className="logo"><img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" /></div>
+        <div className="logo">
+          <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" />
+        </div>
         <Menu mode="horizontal" style={{ marginLeft: 'auto' }}>
-          <Menu.Item key="signin" onClick={handleSignInClick} style={{ marginRight: '2px' }}>SIGN IN</Menu.Item>
-          <Menu.Item key="signup" onClick={handleCreateBlogClick} style={{ marginRight: '2px' }}>SIGN UP</Menu.Item>
+          <Menu.Item key="signin" onClick={handleSignInClick} style={{ marginRight: '2px' }}>
+            SIGN IN
+          </Menu.Item>
+          <Menu.Item key="signup" onClick={handleCreateBlogClick} style={{ marginRight: '2px' }}>
+            SIGN UP
+          </Menu.Item>
         </Menu>
       </div>
       <div className="initial-navbar">
-        <div className="logo"><img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" /></div>
+        <div className="logo">
+          <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" />
+        </div>
         <Menu mode="horizontal" style={{ marginLeft: 'auto' }}>
-          <Menu.Item key="signin" onClick={handleSignInClick}>SIGN IN</Menu.Item>
-          <Menu.Item key="signup">SIGN UP</Menu.Item>
+          <Menu.Item key="signin" onClick={handleSignInClick}>
+            SIGN IN
+          </Menu.Item>
+          <Menu.Item key="signup" onClick={handleCreateBlogClick}>
+            SIGN UP
+          </Menu.Item>
         </Menu>
       </div>
       <div className="container">
-
         <div className="column">
           <img src={`${process.env.PUBLIC_URL}/images/himg2.png`} alt="" />
           <div className="column">
+            {/* Additional content can go here */}
           </div>
         </div>
         <div className="column">

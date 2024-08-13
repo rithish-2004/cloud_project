@@ -7,14 +7,14 @@ import 'react-quill/dist/quill.snow.css';
 import styles from './Homepage.module.css';
 import useWindowSize from './useWindowSize';
 const { Header, Sider, Content, Footer } = Layout;
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 const Homepage = () => {
   const [visible, setVisible] = useState(false);
-  const { width } = useWindowSize(); 
+  const { width } = useWindowSize();
   const [editorValue, setEditorValue] = useState('');
   const [posts, setPosts] = useState([]);
-  const [showMore, setShowMore] = useState(null); 
+  const [showMore, setShowMore] = useState(null);
 
   const showDrawer = () => {
     setVisible(true);
@@ -24,14 +24,14 @@ const Homepage = () => {
     setVisible(false);
   };
 
-  const isMobile = width <= 768; 
+  const isMobile = width <= 768;
 
   const handlePost = () => {
     if (editorValue.trim() === '') {
       message.warning('Please write something before posting.');
       return;
     }
-    
+
     const newPost = {
       content: editorValue,
       date: new Date().toLocaleString(),
@@ -103,7 +103,7 @@ const Homepage = () => {
                 modules={quillModules}
                 className={styles.qlEditor}
               />
-            
+
               <Button type="primary" size="large" onClick={handlePost}>
                 Post Article
               </Button>
@@ -111,12 +111,9 @@ const Homepage = () => {
             <div className={styles.postContainer}>
               {posts.map((post, index) => (
                 <div key={index} className={styles.post}>
-                  <Paragraph
-                    style={{ marginBottom: '10px' }}
-                    ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}
-                  >
-                    {showMore === index ? post.content : post.content.slice(0, 200) + '...'}
-                  </Paragraph>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: showMore === index ? post.content : post.content.slice(0, 200) + '...' }}
+                  />
                   <Button type="link" onClick={() => handleShowMore(index)}>
                     {showMore === index ? 'Show Less' : 'Show More'}
                   </Button>
@@ -164,12 +161,12 @@ const Homepage = () => {
 const quillModules = {
   toolbar: [
     [{ 'font': [] }],
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': '1' }, { 'header': '2' }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
     ['bold', 'italic', 'underline'],
     [{ 'align': [] }],
     ['link'],
-    ['clean'] 
+    ['clean']
   ],
 };
 

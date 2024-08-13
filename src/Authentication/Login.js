@@ -3,10 +3,10 @@ import { TinyColor } from '@ctrl/tinycolor';
 import { Button, ConfigProvider, Input, Layout, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
+//import './App.css';
 import ImageCarousel from './ImageCarousel';
 import './login.css';
-import { auth, provider } from "./config";
+import { auth, provider } from "../config";
 
 import { signInWithPopup } from "firebase/auth";
 const colors3 = ['#40e495', '#30dd8a', '#2bb673'];
