@@ -4,7 +4,7 @@ import Homepage from './HomePage';
 import Login from './Login';
 import Outerpage from './Outerpage';
 import Register from './Register';
-
+import Settings from './Settings';
 function App() {
   return (
     <Router>
@@ -13,6 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />}/>
         <Route path="/homepage" element={<Homepage />} />
+        <Route path="/settings" element={<Settings/>} />
       </Routes>
     </Router>
   );

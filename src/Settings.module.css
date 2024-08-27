@@ -1,0 +1,29 @@
+/* Settings.module.css */
+.settingsContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .ant-divider {
+    margin: 20px 0;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  body.dark-mode .settingsContainer {
+    background: #444;
+  }
+  
