@@ -62,3 +62,27 @@ img {
   width: 100%;
   height: auto;
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 40px; /* Set a fixed height */
+  width: auto; /* Maintain the aspect ratio */
+  margin-right: 12px; /* Space between logo and text */
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.menu-bar {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+}

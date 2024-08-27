@@ -1,0 +1,83 @@
+.postFeed {
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .postContainer {
+    background-color: #6a0dad; /* Purple background */
+    color: white; /* White text color */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* For positioning the button */
+  }
+  
+  .postHeader {
+    font-weight: bold;
+  }
+  
+  .postContent {
+    margin-top: 10px;
+  }
+  
+  .toggleButton {
+    background-color: #6a0dad; /* Purple background */
+    border: none;
+    color: white; /* White text color */
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .toggleButton:hover {
+    background-color: #4e0a8e; /* Darker purple on hover */
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .paginationButton {
+    background-color: #6a0dad; /* Purple background */
+    border: none;
+    color: white; /* White text color */
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .paginationButton:hover {
+    background-color: #4e0a8e; /* Darker purple on hover */
+  }
+  
+  .paginationButton:disabled {
+    background-color: #dcdcdc; /* Light grey for disabled state */
+    cursor: not-allowed;
+  }
+  
+  .modal {
+    background-color: #fff; /* White background for the modal */
+    border-radius: 8px;
+  }
+  
+  .modalContent {
+    padding: 20px;
+  }
+  
+  .modalActions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .commentSection {
+    margin-top: 20px;
+  }
+  

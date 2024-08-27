@@ -1,20 +1,23 @@
 import { HomeOutlined, MenuOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Drawer, Layout, Menu, Typography, message } from 'antd';
+import { Button, Drawer, Input, Layout, Menu, Typography, message } from 'antd';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import blogs from './blogs'; // Import the blogs array
 import styles from './Homepage.module.css';
+import PostFeed from './PostFeed'; // New component for the right section
 import useWindowSize from './useWindowSize';
+
 const { Header, Sider, Content, Footer } = Layout;
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
+const { TextArea } = Input;
 
 const Homepage = () => {
   const [visible, setVisible] = useState(false);
-  const { width } = useWindowSize(); 
+  const { width } = useWindowSize();
   const [editorValue, setEditorValue] = useState('');
-  const [posts, setPosts] = useState([]);
-  const [showMore, setShowMore] = useState(null); 
+  const [posts, setPosts] = useState(blogs); // Initialize with the imported blogs
 
   const showDrawer = () => {
     setVisible(true);
@@ -24,26 +27,44 @@ const Homepage = () => {
     setVisible(false);
   };
 
-  const isMobile = width <= 768; 
+  const isMobile = width <= 768;
 
   const handlePost = () => {
     if (editorValue.trim() === '') {
       message.warning('Please write something before posting.');
       return;
     }
-    
+
     const newPost = {
+      id: Date.now(), // Unique ID for each post
       content: editorValue,
       date: new Date().toLocaleString(),
+      likes: 0,
+      shares: 0,
+      comments: [], // Ensure comments is an array
     };
 
     setPosts([newPost, ...posts]);
-    setEditorValue('');
+    setEditorValue(''); // Clear the editor after posting
     message.success('Article is posted.');
   };
 
-  const handleShowMore = (index) => {
-    setShowMore(index);
+  const handleLike = (id) => {
+    setPosts(posts.map(post =>
+      post.id === id ? { ...post, likes: post.likes + 1 } : post
+    ));
+  };
+
+  const handleShare = (id) => {
+    setPosts(posts.map(post =>
+      post.id === id ? { ...post, shares: post.shares + 1 } : post
+    ));
+  };
+
+  const handleComment = (id, comment) => {
+    setPosts(posts.map(post =>
+      post.id === id ? { ...post, comments: [...post.comments, comment] } : post
+    ));
   };
 
   return (
@@ -59,12 +80,12 @@ const Homepage = () => {
         )}
       </Header>
       <Layout>
-        {!isMobile ? (
+        {!isMobile && (
           <Sider
             trigger={null}
             collapsible
             collapsedWidth="0"
-            style={{ background: '#fff' }}
+            style={{ background: '#fff', width: '25%' }} // Adjusted width
           >
             <div style={{ padding: '16px', textAlign: 'center' }}>
               <img
@@ -83,7 +104,7 @@ const Homepage = () => {
               <Menu.Item key="3" icon={<SettingOutlined />}>Settings</Menu.Item>
             </Menu>
           </Sider>
-        ) : null}
+        )}
         <Layout style={{ padding: '0 24px', minHeight: 280 }}>
           <Content
             style={{
@@ -103,23 +124,14 @@ const Homepage = () => {
                 modules={quillModules}
                 className={styles.qlEditor}
               />
-            
               <Button type="primary" size="large" onClick={handlePost}>
                 Post Article
               </Button>
             </div>
             <div className={styles.postContainer}>
-              {posts.map((post, index) => (
-                <div key={index} className={styles.post}>
-                  <Paragraph
-                    style={{ marginBottom: '10px' }}
-                    ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}
-                  >
-                    {showMore === index ? post.content : post.content.slice(0, 200) + '...'}
-                  </Paragraph>
-                  <Button type="link" onClick={() => handleShowMore(index)}>
-                    {showMore === index ? 'Show Less' : 'Show More'}
-                  </Button>
+              {posts.map((post) => (
+                <div key={post.id} className={styles.post}>
+                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
                   <div className={styles.postDate}>
                     Posted on: {post.date}
                   </div>
@@ -127,6 +139,17 @@ const Homepage = () => {
               ))}
             </div>
           </Content>
+          <Sider
+            width="25%" // Right section takes 1/4 of the page
+            style={{ background: '#fff', padding: '20px' }}
+          >
+            <PostFeed
+              posts={posts}
+              handleComment={handleComment}
+              handleLike={handleLike}
+              handleShare={handleShare}
+            />
+          </Sider>
         </Layout>
       </Layout>
       <Footer style={{ textAlign: 'center' }}>
@@ -164,8 +187,8 @@ const Homepage = () => {
 const quillModules = {
   toolbar: [
     [{ 'font': [] }],
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': '1' }, { 'header': '2' }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
     ['bold', 'italic', 'underline'],
     [{ 'align': [] }],
     ['link'],

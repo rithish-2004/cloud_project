@@ -23,25 +23,26 @@ const Outerpage = () => {
   const handleSignInClick = () => {
     navigate('/login');
   };
-
-  const handleCreateBlogClick = () => {
-    navigate('/login');
+  const handleSignUpClick = () => {
+    navigate('/register');
   };
-
   return (
     <>
       <div className={`navbar ${isVisible ? 'visible' : 'hidden'}`}>
         <div className="logo"><img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" /></div>
         <Menu mode="horizontal" style={{ marginLeft: 'auto' }}>
           <Menu.Item key="signin" onClick={handleSignInClick} style={{ marginRight: '2px' }}>SIGN IN</Menu.Item>
-          <Menu.Item key="signup" style={{ marginRight: '2px' }}>SIGN UP</Menu.Item>
+          <Menu.Item key="signup"  onClick={handleSignUpClick} style={{ marginRight: '2px' }}>SIGN UP</Menu.Item>
         </Menu>
       </div>
       <div className="initial-navbar">
-        <div className="logo"><img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" /></div>
+      <div className="logo-container">
+  <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="Logo" className="logo-image" />
+  <span className="logo-text">BLOG WORLD</span>
+</div>
         <Menu mode="horizontal" style={{ marginLeft: 'auto' }}>
           <Menu.Item key="signin" onClick={handleSignInClick}>SIGN IN</Menu.Item>
-          <Menu.Item key="signup">SIGN UP</Menu.Item>
+          <Menu.Item key="signup" onClick={handleSignUpClick}>SIGN UP</Menu.Item>
         </Menu>
       </div>
       <div className="container">
