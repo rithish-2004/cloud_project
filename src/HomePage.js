@@ -1,9 +1,10 @@
 import { HomeOutlined, MenuOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Drawer, Input, Layout, Menu, Typography, message } from 'antd';
+import { Button, Drawer, Layout, Menu, Typography, message } from 'antd';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 import blogs from './blogs'; // Import the blogs array
 import styles from './Homepage.module.css';
 import PostFeed from './PostFeed'; // New component for the right section
@@ -12,16 +13,20 @@ import { FaThumbsUp, FaShare, FaComment } from "react-icons/fa";
 
 const { Header, Sider, Content, Footer } = Layout;
 const { Title } = Typography;
-const { TextArea } = Input;
 
 const Homepage = () => {
   const [visible, setVisible] = useState(false);
   const { width } = useWindowSize();
   const [editorValue, setEditorValue] = useState('');
+<<<<<<< HEAD
   const [posts, setPosts] = useState(() => {
     const savedBlogs = localStorage.getItem('blogs');
     return savedBlogs ? JSON.parse(savedBlogs) : blogs;
   });
+=======
+  const [posts, setPosts] = useState(blogs); // Initialize with the imported blogs
+  const navigate = useNavigate();
+>>>>>>> e05574ae22aab16d8e97e9d6859e9eb35ef7d1fc
 
   const showDrawer = () => {
     setVisible(true);
@@ -63,6 +68,12 @@ const Homepage = () => {
     );
     setPosts(updatedPosts);
     localStorage.setItem('blogs', JSON.stringify(updatedPosts));
+  };
+
+  const handleMenuClick = (e) => {
+    if (e.key === "3") {
+      navigate('/settings'); // Redirect to the Settings page when Settings menu is clicked
+    }
   };
 
   const handleShare = (id) => {
@@ -116,6 +127,7 @@ const Homepage = () => {
               mode="inline"
               defaultSelectedKeys={['1']}
               style={{ height: '100%', borderRight: 0 }}
+              onClick={handleMenuClick} // Handle menu clicks for navigation
             >
               <Menu.Item key="1" icon={<HomeOutlined />}>Home</Menu.Item>
               <Menu.Item key="2" icon={<UserOutlined />}>Profile</Menu.Item>
@@ -196,6 +208,7 @@ const Homepage = () => {
           mode="inline"
           defaultSelectedKeys={['1']}
           style={{ borderRight: 0 }}
+          onClick={handleMenuClick} // Handle menu clicks for navigation
         >
           <Menu.Item key="1" icon={<HomeOutlined />}>Home</Menu.Item>
           <Menu.Item key="2" icon={<UserOutlined />}>Profile</Menu.Item>
