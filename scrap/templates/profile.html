@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile_data['full_name'] }}'s LinkedIn Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    
+    <div class="container">
+        
+        <div class="profile-card">
+            <div class="header">
+                <h1>Linkedin Profile = {{profile_data['full_name']}}</h1>
+                <h1>{{ profile_data['full_name'] }}</h1>
+                <h2>{{ profile_data['occupation'] }}</h2>
+                <p>{{ profile_data['headline'] }}</p>
+            </div>
+            <div class="summary">
+                <h3>Summary</h3>
+                <p>{{ profile_data['summary'] }}</p>
+            </div>
+            <div class="experience">
+                <h3>Experience</h3>
+                <ul>
+                    {% for experience in profile_data['experiences'] %}
+                        <li>
+                            <strong>{{ experience['title'] }}</strong> at {{ experience['company'] }} <br>
+                            <em>{{ experience['duration'] }}</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="education">
+                <h3>Education</h3>
+                <ul>
+                    {% for education in profile_data['education'] %}
+                        <li>
+                            <strong>{{ education['degree'] }}</strong> - {{ education['institution'] }} <br>
+                            <em>{{ education['duration'] }}</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="skills">
+                <h3>Skills</h3>
+                <ul>
+                    {% for skill in profile_data['skills'] %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

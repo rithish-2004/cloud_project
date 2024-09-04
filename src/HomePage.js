@@ -8,6 +8,7 @@ import blogs from './blogs'; // Import the blogs array
 import styles from './Homepage.module.css';
 import PostFeed from './PostFeed'; // New component for the right section
 import useWindowSize from './useWindowSize';
+import { FaThumbsUp, FaShare, FaComment } from "react-icons/fa";
 
 const { Header, Sider, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -17,7 +18,10 @@ const Homepage = () => {
   const [visible, setVisible] = useState(false);
   const { width } = useWindowSize();
   const [editorValue, setEditorValue] = useState('');
-  const [posts, setPosts] = useState(blogs); // Initialize with the imported blogs
+  const [posts, setPosts] = useState(() => {
+    const savedBlogs = localStorage.getItem('blogs');
+    return savedBlogs ? JSON.parse(savedBlogs) : blogs;
+  });
 
   const showDrawer = () => {
     setVisible(true);
@@ -28,7 +32,6 @@ const Homepage = () => {
   };
 
   const isMobile = width <= 768;
-
   const handlePost = () => {
     if (editorValue.trim() === '') {
       message.warning('Please write something before posting.');
@@ -44,28 +47,43 @@ const Homepage = () => {
       comments: [], // Ensure comments is an array
     };
 
+    // Update the state
     setPosts([newPost, ...posts]);
+
+    // Optionally save to local storage or a server here
+    localStorage.setItem('blogs', JSON.stringify([newPost, ...posts]));
+
     setEditorValue(''); // Clear the editor after posting
     message.success('Article is posted.');
   };
 
   const handleLike = (id) => {
-    setPosts(posts.map(post =>
+    const updatedPosts = posts.map(post =>
       post.id === id ? { ...post, likes: post.likes + 1 } : post
-    ));
+    );
+    setPosts(updatedPosts);
+    localStorage.setItem('blogs', JSON.stringify(updatedPosts));
   };
 
   const handleShare = (id) => {
-    setPosts(posts.map(post =>
+    const updatedPosts = posts.map(post =>
       post.id === id ? { ...post, shares: post.shares + 1 } : post
-    ));
+    );
+    setPosts(updatedPosts);
+    localStorage.setItem('blogs', JSON.stringify(updatedPosts));
   };
 
-  const handleComment = (id, comment) => {
-    setPosts(posts.map(post =>
-      post.id === id ? { ...post, comments: [...post.comments, comment] } : post
-    ));
+  const handleComment = (id) => {
+    const comment = prompt('Enter your comment:');
+    if (comment) {
+      const updatedPosts = posts.map(post =>
+        post.id === id ? { ...post, comments: [...post.comments, comment] } : post
+      );
+      setPosts(updatedPosts);
+      localStorage.setItem('blogs', JSON.stringify(updatedPosts));
+    }
   };
+
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -132,12 +150,16 @@ const Homepage = () => {
               {posts.map((post) => (
                 <div key={post.id} className={styles.post}>
                   <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                  <div className={styles.postDate}>
-                    Posted on: {post.date}
+                  <div className={styles.postDate}>Posted on: {post.date}</div>
+                  <div className={styles.postActions}>
+                    <FaThumbsUp className={styles.icon} />
+                    <FaComment className={styles.icon} />
+                    <FaShare className={styles.icon} />
                   </div>
                 </div>
               ))}
             </div>
+
           </Content>
           <Sider
             width="25%" // Right section takes 1/4 of the page
@@ -192,7 +214,7 @@ const quillModules = {
     ['bold', 'italic', 'underline'],
     [{ 'align': [] }],
     ['link'],
-    ['clean'] 
+    ['clean']
   ],
 };
 
