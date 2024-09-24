@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .profile, .repos {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .profile {
+            background-color: #ffffff;
+        }
+        .repos {
+            background-color: #ffffff;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .repo {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .repo a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .repo a:hover {
+            text-decoration: underline;
+        }
+        .languages {
+            margin-top: 20px;
+        }
+        .bar {
+            height: 30px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: right;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+        .bar-label {
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <h1>{{ profile.name }}</h1>
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <p><strong>Followers:</strong> {{ profile.followers }}</p>
+        <p><strong>Following:</strong> {{ profile.following }}</p>
+        <p><strong>Stars:</strong> {{ profile.public_repos }}</p>
+        <p><strong>Repositories:</strong> {{ profile.public_repos }}</p>
+        <p><strong>Profile URL:</strong> <a href="{{ profile.html_url }}" target="_blank">{{ profile.html_url }}</a></p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        <p><strong>Company:</strong> {{ profile.company }}</p>
+        <p><strong>Location:</strong> {{ profile.location }}</p>
+
+        <!-- Language Usage Visualization -->
+        <div class="languages">
+            <h2>Language Usage</h2>
+            {% if languages %}
+                {% for language, percentage in languages.items() %}
+                    <div class="bar" style="width: {{ percentage }}%;">
+                        <span class="bar-label">{{ language }} ({{ percentage | round(2) }}%)</span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No languages used.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="repos">
+        <h2>Repositories</h2>
+        {% for repo in repos %}
+        <div class="repo">
+            <h3><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a></h3>
+            <p><strong>Description:</strong> {{ repo.description or "No description" }}</p>
+            <p><strong>Language:</strong> {{ repo.language or "N/A" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -2,6 +2,7 @@ import { HomeOutlined, MenuOutlined, SettingOutlined, UserOutlined } from '@ant-
 import { Button, Drawer, Layout, Menu, Typography, message } from 'antd';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
+import { FaComment, FaShare, FaThumbsUp } from "react-icons/fa";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
@@ -9,24 +10,43 @@ import blogs from './blogs'; // Import the blogs array
 import styles from './Homepage.module.css';
 import PostFeed from './PostFeed'; // New component for the right section
 import useWindowSize from './useWindowSize';
-import { FaThumbsUp, FaShare, FaComment } from "react-icons/fa";
+
 
 const { Header, Sider, Content, Footer } = Layout;
 const { Title } = Typography;
 
 const Homepage = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const { width } = useWindowSize();
   const [editorValue, setEditorValue] = useState('');
-<<<<<<< HEAD
   const [posts, setPosts] = useState(() => {
     const savedBlogs = localStorage.getItem('blogs');
     return savedBlogs ? JSON.parse(savedBlogs) : blogs;
   });
-=======
-  const [posts, setPosts] = useState(blogs); // Initialize with the imported blogs
-  const navigate = useNavigate();
->>>>>>> e05574ae22aab16d8e97e9d6859e9eb35ef7d1fc
+
+  const handleMenuClick = (e) => {
+    if (e.key === "2") {
+      const username = prompt("Enter GitHub username:"); // Prompt user for username
+      if (username) {
+        window.location.href = `/profile/${username}`; // Redirect to profile with username
+      }
+    } else if (e.key === "3") {
+      navigate('/settings'); // Redirect to the Settings page when Settings menu is clicked
+    }
+  };
+
+// Update the menu item click handlers
+<Menu
+  mode="inline"
+  defaultSelectedKeys={['1']}
+  style={{ height: '100%', borderRight: 0 }}
+  onClick={handleMenuClick} // Handle menu clicks for navigation
+>
+  <Menu.Item key="1" icon={<HomeOutlined />}>Home</Menu.Item>
+  <Menu.Item key="2" icon={<UserOutlined />}>Profile</Menu.Item> {/* Profile Menu Item */}
+  <Menu.Item key="3" icon={<SettingOutlined />}>Settings</Menu.Item>
+</Menu>
 
   const showDrawer = () => {
     setVisible(true);
@@ -68,12 +88,6 @@ const Homepage = () => {
     );
     setPosts(updatedPosts);
     localStorage.setItem('blogs', JSON.stringify(updatedPosts));
-  };
-
-  const handleMenuClick = (e) => {
-    if (e.key === "3") {
-      navigate('/settings'); // Redirect to the Settings page when Settings menu is clicked
-    }
   };
 
   const handleShare = (id) => {
@@ -121,6 +135,7 @@ const Homepage = () => {
                 src="https://via.placeholder.com/100"
                 alt="Profile"
                 style={{ borderRadius: '50%', width: '80px', height: '80px' }}
+                onClick={handleMenuClick}
               />
             </div>
             <Menu
